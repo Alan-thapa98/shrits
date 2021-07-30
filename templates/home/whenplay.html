@@ -1,0 +1,1363 @@
+{% extends 'base.html' %}
+
+{% block title %}{{Videos.Video_name}} {% endblock title%}
+{% block videoactive %} active {% endblock videoactive %}
+{% block body %}
+{% load humanize %}
+
+<div class="container-fluid" style="  background: #222222; color: white;">
+    <div class="container-fluid ">
+        <div class="row pt-1">
+            <div class="col-md-8 ">
+                <div class="video-palyer-container mt-2">
+                    <video src="{{Videos.Video_url.url}}" width="100%" height="440" controls autoplay
+                        style="outline: none;"></video>
+                    <div class="row m-0 p-0 ">
+                        <div class="col-lg-4 col-12">
+                            <h6 style="font-size: .8rem; margin-left:20px; color:#999999">{{Videos.views}} views •
+                                {{Videos.timestamp|naturaltime}}
+                            </h6>
+                            <span style="font-size: .8rem; margin-left:20px; color:#d4cece">
+                                <span>watching</span> <span>: 400 </span>
+                                <!-- peoples now -->
+                            </span>
+                        </div>
+                        <div class="col-lg-8 col-12">
+                            <p class=" pl-1" style="font-size: 1rem; font-weight:bold;">
+                                {{Videos.Video_name}}
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding:0px; margin:2px; " class="row  hover-icon-of-like-donwload-herat-row">
+                        <div class="col-2 m-0 p-0 "><a href="channel" class="channel-icon1">
+                                <a href="./channel">
+                                    <img style="border-radius: 60px;" src=" {{Videos.image.url}}" height="36" width="36"
+                                        class="class thumanil-img1">
+                                </a>
+                                <a href="./channel" style="text-decoration: none; font-weight: bold;">
+                                    {{request.user|truncatechars:50}}</a>
+                        </div>
+                        <div class="col-2 pl-4 ">
+                            <i class="fa fa-heart circle_for_design"></i>
+                            <!-- <div class="heart-btn">
+                                <div class="content">
+                                    <span class="heart"></span>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div download="../static/vid/1 HOUR SPECIAL NIGHTCORE ♫ BEST NIGHTCORE OF ALL TIME ★ TOP 20 NIGHTCORE SONGS [iA7uQCruBgU].mp4"
+                            class="col-2   pl-4 hover-icon-of-like-donwload-herat">
+                            <a href="#"
+                                download="../static/vid/1 HOUR SPECIAL NIGHTCORE ♫ BEST NIGHTCORE OF ALL TIME ★ TOP 20 NIGHTCORE SONGS [iA7uQCruBgU].mp4"><i
+                                    class="fa mt-2 fa-download" aria-hidden="true"></i><span> 300K</span></a>
+                        </div>
+                        <div class="col-2 pl-4 hover-icon-of-like-donwload-herat">
+                            <i class="fa mt-2 mt-2  fa-share text-primary" aria-hidden="true"></i><span> 234</span>
+                        </div>
+                        <div class="col-2 pl-4  hover-icon-of-like-donwload-herat">
+                            <i class="fa fa-plus-square mt-2 "></i>
+                            <span>Save</span>
+                        </div>
+                        <div class="col-2  ">
+                            <button class="hover-icon-of-like-donwload-sub-btn" style="cursor: pointer;">
+                                <span class="mt-1 text-light"><i
+                                        class="fa fa-bell hover-icon-of-like-donwload-herat mt-1"
+                                        aria-hidden="true"></i> (245.1K)</span>
+
+                            </button>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- style for the video video palsyer  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <style type="text/css">
+                    .video-palyer-container {
+                        /*background-color: #fff;*/
+                        border-bottom: 1px solid rgb(94, 90, 90);
+
+                    }
+                </style>
+                <style>
+                    .hover-icon-of-like-donwload-herat-row {
+                        height: 40px;
+                        color: #fff;
+                        cursor: pointer;
+                        font-weight: 400;
+                        margin-top: 3px;
+                        margin-bottom: 3px;
+
+
+                    }
+
+
+
+                    .hover-icon-of-like-donwload-herat:hover {
+
+                        border-radius: 5px;
+                        background: rgb(94, 90, 90);
+
+
+
+                    }
+
+                    .hover-icon-of-like-donwload-sub-btn {
+
+                        border-radius: 5px;
+                        background: red;
+                        align-items: center;
+                        justify-content: center;
+                        padding-left: 6px;
+                        padding-right: 6px;
+                        padding-top: 2px;
+                        padding-bottom: 2px;
+
+
+
+
+                    }
+                </style>
+
+                <div class="row m-1" style="color: #f5f5f5;">
+                    <p>Discription:
+                        <p>{{Videos.Desc | safe | truncatechars:405}}<br><a href="#">{{Videos.Tages}}</a></p>
+                        <span id="more" onclick="more()"
+                            style=" color:blue; font-weight: 500; cursor: pointer;">more..</span>
+                    </p>
+                </div>
+
+
+
+
+                <hr style=" margin-bottom: 2px;">
+                <h6 style="  font-weight: bold;" class="text-light">Comments: 1113</h6>
+
+                <div class="row text-center">
+                    <div class="col-3"><a href="channel" class="channel-icon1">
+                            <a href="channel">
+                                <img style="border-radius: 60px;" src=" {{Videos.image.url}}" height="36" width="36"
+                                    class="class thumanil-img1">
+                            </a>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <input type="text " placeholder="Comment" class="input-commment">
+                    </div>
+                    <div class="col-3">
+                        <div class="btn btn-outline-primary">Send <span>
+                                <i class="fab fa-telegram-plane fa-1x" aria-hidden="true"></i></span></div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row  my-3 shareits-comment-mediaquiery-mobile-display-none">
+                    <div class="col-3 text-center">
+                        <a href="channel">
+                            <img style="border-radius: 60px;" src=" {{Videos.image.url}}" height="36" width="36"
+                                class="class thumanil-img1">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <a href="#">
+                            <span style="font-weight: bold; text-decoration: none;" class="text-light">Alisha 1
+                                day
+                                Ago</span></a>
+                        <br>
+                        <p class="m-0 p-0">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus expedita officia nobis
+                            velit,
+                            hic, eveniet <span style=" color:blue; font-weight: 500; cursor: pointer;">more..</span>
+                        </p>
+                        <div class="row" style="margin-top: 1px; ">
+                            <div class="col-3" style=" cursor: pointer;">123K <i class="fa  fa-thumbs-up"></i></div>
+                            <div class="col-3" style=" cursor: pointer;">1K <i class="fa  fa-thumbs-down"></i></div>
+                            <div class="col-3 text-primary " style="font-weight: bold; cursor: pointer;">123replays
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-3">
+                        <div class="btn btn-danger text-light">
+                            <i class="fa fa-heart fa-1x" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  my-3 shareits-comment-mediaquiery-mobile-display-none">
+                    <div class="col-3 text-center">
+                        <a href="channel">
+                            <img style="border-radius: 60px;" src=" {{Videos.image.url}}" height="36" width="36"
+                                class="class thumanil-img1">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <a href="#">
+                            <span style="font-weight: bold; text-decoration: none;" class="text-light">Chahah 23
+                                day
+                                Ago</span></a>
+                        <br>
+                        <p class="m-0 p-0">
+                            Ummmmmm... Nice </p>
+                        <div class="row" style="margin-top: 1px; ">
+                            <div class="col-3 text-primary" style=" cursor: pointer;">3K <i
+                                    class="fa  fa-thumbs-up"></i>
+                            </div>
+                            <div class="col-3" style=" cursor: pointer;">1K <i class="fa  fa-thumbs-down"></i></div>
+                            <div class="col-3 text-primary " style="font-weight: bold; cursor: pointer;">123replays
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-3">
+                        <div class="btn btn-danger text-light">
+                            <i class="fa fa-heart fa-1x" aria-hidden="true"></i></span>
+                            <div class="heart-btn">
+                                <div class="content">
+                                    <span class="heart"></span>
+                                    <!-- <span class="text">Like</span>
+                                    <span class="numb"></span> -->
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('.content').click(function () {
+                                        $('.content').toggleClass("heart-active")
+                                        $('.text').toggleClass("heart-active")
+                                        $('.numb').toggleClass("heart-active")
+                                        $('.heart').toggleClass("heart-active")
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  my-3 shareits-comment-mediaquiery-mobile-display-none">
+                    <div class="col-3 text-center">
+                        <a href="channel">
+                            <img style="border-radius: 60px;" src=" {{Videos.image.url}}" height="36" width="36"
+                                class="class thumanil-img1">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <a href="#">
+                            <span style="font-weight: bold; text-decoration: none;" class="text-light">Rajesh Baniya
+                                3
+                                day
+                                Ago</span></a>
+                        <br>
+                        <p class="m-0 p-0">
+                            It you be Nice if you upolade all the videos in full Screen </p>
+                        <div class="row" style="margin-top: 1px; ">
+                            <div class="col-3" style=" cursor: pointer;">3K <i class="fa  fa-thumbs-up"></i></div>
+                            <div class="col-3" style=" cursor: pointer;">1K <i class="fa  fa-thumbs-down"></i></div>
+                            <div class="col-3 text-primary " style="font-weight: bold; cursor: pointer;">123replays
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-3">
+                        <div class="btn btn-danger text-light">
+                            <i class="fa fa-heart fa-1x" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  my-3 shareits-comment-mediaquiery-mobile-display-none">
+                    <div class="col-3 text-center">
+                        <a href="channel">
+                            <img style="border-radius: 60px;" src=" {{Videos.image.url}}" height="36" width="36"
+                                class="class thumanil-img1">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <a href="#">
+                            <span style="font-weight: bold; text-decoration: none;" class="text-light">Chahah 23
+                                day
+                                Ago</span></a>
+                        <br>
+                        <p class="m-0 p-0">
+                            Awsomae video bro I want more </p>
+                        <div class="row" style="margin-top: 1px; ">
+                            <div class="col-3" style=" cursor: pointer;">3K <i class="fa  fa-thumbs-up"></i></div>
+                            <div class="col-3" style=" cursor: pointer;">1K <i class="fa  fa-thumbs-down"></i></div>
+                            <div class="col-3 text-primary " style="font-weight: bold; cursor: pointer;">123replays
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-3">
+                        <div class="btn btn-danger text-light">
+                            <i class="fa fa-heart fa-1x" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+
+
+                {% for catsvid in RelatedVidoes %}
+
+                <div class="row mt-1">
+                    <div class=" col-12 col-lg-5  mr-0">
+                        <a href="/Whenplay/videos{{catvid.Video_url}}in-shareits" class="thumbnail"
+                            data-duration="12:24">
+                            <img class="strounded-reply thumanil-img" style="border-radius: 3px;" width="175"
+                                height="110" src="{{catsvid.image.url}}">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6 ml-0">
+                        <div class="video-buttom-section1">
+                            <div class="video-details">
+                                <a href="/Whenplay/videos{{catsvid.Video_id}}in-shareits"
+                                    style="  color: rgb(255, 251, 251);font-size: .9rem; font-weight:bold; margin-top:1px; text-decoration: none; color:#fff"
+                                    class="video-title1 text-success">{{catsvid.Video_name| safe | truncatechars:45}}
+                                </a>
+                                <a href="/Whenplay/videos{{catsvid.Video_id}}in-shareits"
+                                    style="  color: rgb(255, 251, 251);font-size: .8rem;   text-decoration: none; margin-top: 0px;"
+                                    class="video-channel-name1"><i class="fa  fa-share text-primary" aria-hidden="true">
+                                    </i> Anime Dub</a>
+                                <div style="  color: rgb(255, 251, 251);font-size: .8rem;    text-decoration: none; color:#fff"
+                                    class="video-matedate1">
+                                    <span class="text-success"> {{catsvid.views}} views</span>
+                                    •
+                                    <span class="text-success">{{catsvid.timestamp|naturaltime}}</span>
+                                    <span
+                                        style="font-size: x-small; color:#fff; background: #131212; border-radius: 2px;">
+                                        new</span>
+                                </div>
+                                <!-- <h1>{{catsvid.Category}}</h1> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<style>
+    .shareits-comment-proflie-bell-nav-dropdown-chhat {
+        width: 500px;
+        height: 90vh;
+        border: 20px;
+        background-color: #222;
+
+    }
+
+    .shareits-comment-proflie-bell-nav-dropdown-bell {
+        width: 500px;
+        height: 90vh;
+        border: 20px;
+        background-color: #222;
+
+    }
+
+    .shareits-comment-proflie-bell-nav-dropdown-settings {
+        width: 300px;
+        height: 90vh;
+        border: 20px;
+        background-color: #222;
+
+    }
+
+    .sharites-decorationn-of-icones-of-nav {
+        border-radius: 50px;
+        background-color: #222;
+        color: #fff;
+    }
+
+
+    .input-decoration-search {
+        border-radius: 0%;
+        margin-top: 10px;
+        width: 500px;
+        height: 1.9rem;
+        margin-right: 0px;
+        margin-left: 0px;
+        text-decoration: none;
+    }
+
+
+
+
+
+    .shareits-input-decoration-of-nav-icon-design {
+        margin-top: 10px;
+        height: 1.9rem;
+
+        width: 40px;
+        margin-right: 0px;
+        margin-left: 0px;
+        font-size: 120;
+        padding-bottom: 2px;
+        background: #222222;
+        outline: none;
+        position: relative;
+        border-radius: none;
+
+    }
+
+    .shareits-input-decoration-of-nav-icon-design-outline {
+        width: auto;
+        height: 2.2rem;
+        margin-right: 0px;
+        margin-left: 0px;
+
+    }
+
+
+
+
+
+    .nav-icon-hover-comment {
+        margin-left: 20px;
+    }
+
+    .nav-icon-hover-home {
+        margin-left: 65px;
+
+
+    }
+
+    .nav-icon-hover-home {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .nav-icon-hover-discover {
+        padding-left: 10px;
+        padding-right: 20px;
+        margin-right: 10px;
+    }
+
+    .nav-icon-hover-post {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .nav-icon-hover-home:hover,
+    .nav-icon-hover-discover:hover,
+    .nav-icon-hover-post:hover,
+    .nav-icon-hover:hover,
+    .nav-icon-hover-comment:hover,
+    .nav-icon-hover-home:hover {
+        /* background: rgb(111, 113, 114);*/
+        background: blue;
+        border-radius: 10px;
+        color: #f5f5f5;
+    }
+</style>
+<style>
+    body {
+        text-transform: capitalize;
+
+    }
+
+    nav {
+        position: sticky;
+        -webkit-position: sticky;
+        top: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #ffff;
+
+    }
+
+    input {
+        background: rgb(95, 92, 92);
+        height: 32px;
+        width: auto;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        padding: 0 60px 0 20px;
+        font-size: 18px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-search:hover {
+        border: 2px solid blue;
+    }
+
+    .input:hover {
+        border: 2px solid blue;
+    }
+
+    .search-btn {
+        margin-left: 0px;
+        height: 30px;
+        margin-right: 0px;
+        outline: none;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .comment-line {
+        border-bottom: 1px solid #fff;
+    }
+
+
+    .different-icon-decorations {
+        color: #fff;
+        font-size: 1.7rem;
+
+    }
+
+    .different-icon-decorations:hover {
+        color: #fff;
+        font-size: 1.7rem;
+        content: attr("Watch new");
+
+
+    }
+
+
+    .dropwh {
+        height: 94vh;
+        width: 350px;
+        overflow: scroll;
+        scrollbar-color: #234682;
+        background: #6e6868;
+        color: #ffff;
+
+
+
+    }
+
+    .dropwhsettings {
+        height: 94vh;
+        width: 250px;
+        overflow: scroll;
+        scrollbar-color: #234682;
+        background: #6e6868;
+        color: #ffff;
+
+
+
+    }
+
+    .dropbell {
+        height: 94vh;
+        width: 420px;
+        overflow: scroll;
+        scrollbar-color: #234682;
+        background: #6e6868;
+        color: #ffff;
+
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        display: none;
+    }
+
+    /* Scrollbar track like a railw */
+    ::-webkit-scrollbar-track {
+        background-color: rgb(179, 162, 162);
+        /*    <!-- these is also editable; -->*/
+        display: none;
+
+
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background: #d8d8d8f5;
+        display: none;
+
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #d8d8d8f5;
+        display: none;
+
+
+    }
+
+    .class-hr-down {
+        border-bottom: 1px solid white;
+
+    }
+
+    .sharit-nav-icons {
+        margin-left: 4.5rem;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+
+    }
+
+
+    /* "end of shareits-post-diffdernt-icons"*/
+
+    /* hover-of-features-shareits */
+    .shareits-hover-shuscription-cahnnel-name {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        color: #fff;
+
+    }
+
+    .shareits-feratures-homeand-others {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        text-decoration: none;
+        color: #fff;
+
+    }
+
+    .hover-of-features-shareits {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        color: #fff;
+    }
+
+    .hover-of-features-shareitsits {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        color: #fff;
+
+
+    }
+
+    .hover-of-features-shareitsits:hover {
+        background-color: rgb(68, 62, 62);
+
+
+    }
+
+    .hover-of-features-shareits:hover {
+        background-color: rgb(68, 62, 62);
+
+
+    }
+
+    .shareits-feratures-homeand-others:hover {
+        background-color: rgb(68, 62, 62);
+        cursor: pointer;
+
+
+    }
+
+    .shareits-hover-shuscription-cahnnel-name:hover {
+
+        background-color: rgb(68, 62, 62);
+        cursor: pointer;
+        border-radius: 2px;
+
+
+    }
+
+    .shareits-videos-text-decoration {
+        text-decoration: none;
+
+    }
+
+    .sub-btn {
+        margin-top: 1rem;
+        padding: 3px 6px 3px 6px;
+        outline: none;
+        border-radius: 5px;
+        background-color: red;
+        color: #ffff;
+
+    }
+
+    /* end of hover-of-features-shareits */
+</style>
+<style>
+    .shareits-post-diffdernt-icons {
+        background: rgb(76, 76, 243);
+        border-radius: 20px;
+        color: #ffff;
+        text-align: center;
+        padding: .5rem;
+
+
+    }
+
+    .shareits-post-diffdernt-icons-top {
+        margin: 0px;
+        padding: 0px;
+        background-color: aliceblue;
+    }
+
+    .shareits-post-diffdernt-icons:hover {
+        color: white;
+        background: rgb(86, 86, 184);
+        cursor: pointer;
+
+    }
+
+    .shareits-post-differnt-icon-fontsize {
+        font-size: .6;
+    }
+
+    .colo-2-different-post-icon-postleft-border {
+        margin-left: 2px;
+        border-left: 1px solid #fff;
+    }
+
+    .sharites-user-onle-btnsing {
+        color: rgb(35, 255, 82);
+        font-size: 1rem;
+
+
+    }
+
+    .card {
+        background: rgb(41, 39, 39);
+        color: #f5f5f5;
+    }
+
+    .sharite-hover-of-like-comment-and-bell:hover {
+        background: rgb(66, 63, 63);
+        cursor: pointer;
+    }
+
+    .sharite-hover-of-like-comment-and-bell {
+        margin: 0px;
+        background: rgb(51, 48, 48);
+        padding-top: 10px;
+        border-radius: 20px;
+    }
+
+    .sharite-hover-of-like-comment-and-bell-row {
+        margin: 0px;
+        background: rgb(51, 48, 48);
+        border-radius: 20px;
+    }
+
+    .telegram-hover-send:hover {
+        border-radius: 20px;
+        background: rgb(240, 233, 233);
+
+    }
+
+    .sharitesh-oneline-friends-row {
+        color: #fff;
+        cursor: pointer;
+        font-weight: 400;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .sharitesh-oneline-friends-row:hover {
+        background: rgb(54, 50, 50);
+        border-radius: 2px;
+
+    }
+
+
+    .sharitesh-oneline-friends-col-3 {
+        margin-top: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    .sharitesh-oneline-friends-col-9 {
+        color: #fff;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+
+    .sharits-showmore-content {
+        background: rgb(71, 77, 80);
+        font-size: x-small;
+        margin-top: .4rem;
+        margin-left: .2rem;
+        padding: 0%;
+    }
+
+    .sharitesh-oneline-friends-col-9-row-1-new-friend-reply {
+        font-size: small;
+        margin: 2px;
+
+    }
+
+    .sharitesh-oneline-friends-col-9-row-1-friend-active {
+        color: rgb(11, 245, 11);
+        margin-left: 2px;
+    }
+
+    .asidecol2 {
+        position: sticky;
+        -webkit-position: sticky;
+        top: 0;
+        text-transform: capitalize;
+        overflow: scroll;
+        height: 117vh;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        overflow: scroll;
+
+    }
+
+    .sharitesh-oneline-friends-col-9-row-1-new-friend-btn {
+        background: rgb(71, 77, 80);
+        font-size: x-small;
+        margin-top: .4rem;
+        margin-left: .2rem;
+        padding: 0%;
+    }
+</style>
+<!-- these is the style of side navbar -->
+<style>
+    .video-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        row-gap: 3rem 1rem;
+        padding: 3rem 0;
+        margin: 0 1.5rem;
+        border-top: 4px solid #ccc;
+
+
+    }
+
+    .video-section:first-child {
+        border-top: none;
+
+    }
+
+    .channel-icon {
+        margin-right: .75rem;
+        width: 36px;
+        height: 36px;
+        /* border-radius: 3rem; */
+
+
+    }
+
+    .video-buttom-section {
+        color: yellow;
+        display: flex;
+        align-items: flex-start;
+        margin-top: 1rem;
+
+    }
+
+    .video-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .thumonail {
+        position: relative;
+        display: flex;
+    }
+
+    .thumonail::before {
+        contain: attr(data-duration);
+        position: absolute;
+        background-color: rgba(0, 0, 0, .85);
+        color: white;
+        right: 5px;
+        bottom: 5px;
+        padding: .1rem .3rem;
+        border-radius: .3rem;
+        font-size: .9rem;
+    }
+
+    .video-details {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    .video-title {
+        font-size: .8rem;
+        font-weight: bold;
+        margin-bottom: .2rem;
+        color: #f5f5f5;
+        font-size: .9rem;
+        font-weight: .3rem;
+
+    }
+
+    .video-channel-name {
+        margin-bottom: .1rem;
+        transition: .1500ms;
+        font-size: .9rem;
+        font-weight: .3rem;
+
+    }
+
+
+    .video-channel-name,
+    .video-matedate {
+        color: #555;
+        font-size: .8rem;
+        font-weight: .3rem;
+    }
+
+    .video-section-title {
+        grid-column: 1/-1;
+        margin: -.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .5rem;
+    }
+
+    .video-section-title-close {
+        border: none;
+        background: none;
+        font-size: 2rem;
+        color: #555555;
+        cursor: pointer;
+    }
+
+    .videos {
+        color: #f9f9f9;
+    }
+
+    .icons-colors {
+        color: #d8d8d8;
+    }
+
+    .video {
+        overflow: scroll;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        height: 120vh;
+    }
+
+    .sidenav-holder-col2 {
+        position: sticky;
+        -webkit-position: sticky;
+        top: 0;
+        text-transform: capitalize;
+        overflow: scroll;
+        height: 120vh;
+        padding-bottom: 0;
+        margin-bottom: 0;
+
+    }
+
+
+    input {
+        height: 32px;
+        width: 470px;
+        outline: none;
+        margin: 0px;
+        padding: 0px;
+        border-radius: 4px;
+        color: rgb(218, 218, 218);
+
+    }
+
+    .input-search:hover {
+        border: 2px solid blue;
+    }
+
+    .input:hover {
+        border: 2px solid blue;
+    }
+
+    .search-btn {
+        margin-left: 0px;
+        height: 30px;
+        margin-right: 0px;
+        outline: none;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+
+    ::placeholder {
+        color: rgb(212, 205, 205);
+        padding: 20px;
+
+
+    }
+
+    .different-icon-decorations {
+        color: #fff;
+        font-size: 1.8rem;
+
+    }
+
+    .categories {
+        padding: 1rem 2rem;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+
+    }
+
+    .category-section {
+        display: flex;
+        overflow: hidden;
+    }
+
+    .category {
+        margin: 0 1rem;
+        word-wrap: none;
+        border-radius: 990px;
+        padding: .3rem 1rem;
+        font-size: inherit;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .category:hover {
+        background: rgb(224, 224, 240);
+        color: #111111;
+        border-color: #eeee;
+        cursor: pointer;
+    }
+
+    /*   .active {
+        background: #2c2c2c;
+        color: #60606060;
+        border-color: #eeee;
+        cursor: pointer;
+
+
+    }
+*/
+    .magnavideo-sectiom {
+        border-top: 1px;
+        border-bottom: 1px;
+        border-color: red;
+        padding: 20px;
+
+    }
+</style>
+<style>
+    @media only screen and (max-width: 400px) {
+
+        #course-content-box {
+            height: 57px;
+        }
+    }
+
+    @media only screen and (max-width: 560px) {
+        img.rounded-circle {
+            height: 0px;
+            /* visibility: hidden; */
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        #course-content-box {
+            height: 46px;
+            transition: height 0.4s;
+            position: static;
+        }
+
+        #content-box {
+            height: 70vh;
+            /* visibility: hidden; */
+        }
+
+        #toggle-button {
+            visibility: visible;
+        }
+
+        #video-box {
+            z-index: 1;
+        }
+
+        #sticky-d {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        #toggleCourse {
+            display: inline;
+        }
+
+        .other {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+    }
+</style>
+<style>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .video-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 3rem 1rem;
+        padding: 3rem 0;
+        margin: 0 1.5rem;
+        border-top: 4px solid #CCC;
+    }
+
+    .video-section:first-child {
+        border-top: none;
+    }
+
+    .video-container {
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .video-container:hover {
+        opacity: unset;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .thumbnail {
+        position: relative;
+        display: flex;
+    }
+
+    .thumbnail::before {
+        content: attr(data-duration);
+        position: absolute;
+        background-color: rgba(0, 0, 0, .85);
+        color: white;
+        right: 5px;
+        bottom: 5px;
+        padding: .1em .3em;
+        border-radius: .3em;
+        font-size: .9rem;
+    }
+
+    .thumbnail-image {
+        width: 100%;
+        height: 100%;
+        min-width: 250px;
+        min-height: 150px;
+        background-color: #AAA;
+    }
+
+    .video-bottom-section {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 1rem;
+    }
+
+    .channel-icon {
+        margin-right: .75rem;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        background-color: #AAA;
+    }
+
+    .video-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .video-details a {
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .video-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: .5rem;
+        text-decoration: none;
+        color: black;
+    }
+
+    .video-title a {
+        text-decoration: none;
+    }
+
+    .video-channel-name {
+        margin-bottom: .1rem;
+        text-decoration: none;
+        transition: color 150ms;
+    }
+
+    .video-channel-name:hover {
+        color: #111;
+    }
+
+    .video-channel-name,
+    .video-metadata {
+        color: #555;
+    }
+
+    .video-section-title {
+        grid-column: 1 / -1;
+        margin: -.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 .5rem;
+    }
+
+    .video-section-title-close {
+        border: none;
+        background: none;
+        padding: 0;
+        font-size: 2rem;
+        color: #555;
+        cursor: pointer;
+    }
+
+    .videos {
+        background-color: #F9F9F9;
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+
+    .categories {
+        padding: 1rem 2rem;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+    }
+
+    .category-section {
+        display: flex;
+        overflow: hidden;
+    }
+
+    .category {
+        margin-right: 1rem;
+        word-wrap: none;
+        white-space: nowrap;
+        border: 1px solid #CCC;
+        border-radius: 900px;
+        background-color: #E7E7E7;
+        padding: .5rem 1rem;
+        font-size: inherit;
+        cursor: pointer;
+        transition: background-color 150ms;
+    }
+
+    .category:hover {
+        background-color: #DDD;
+    }
+
+    .category.active {
+        background-color: #606060;
+        color: white;
+        border-color: #EEE;
+    }
+
+    .category:last-child {
+        margin-right: 0;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .youtube-logo {
+        height: 20px;
+    }
+
+    .search-bar {
+        display: flex;
+        flex-grow: 1;
+        margin: 0 2rem 0 4rem;
+    }
+
+    .search-input {
+        width: 100%;
+        font-size: inherit;
+        padding: .4em;
+        border: 1px solid #777;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .search-btn {
+        display: flex;
+        align-items: center;
+        padding: 0 1.25rem;
+        border: 1px solid #777;
+        background-color: #F8F8F8;
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        cursor: pointer;
+    }
+
+    .search-btn:hover {
+        background-color: #F0F0F0;
+    }
+
+    .menu-icons {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .menu-channel-icon {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        background-color: #AAA;
+    }
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+
+
+{% endblock %}

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <!-- links of all the websit -->
+  <link rel="stylesheet" href="../static/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../static/css/bootstrap-reboot.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+  <!--  fontawasome -->
+  <script src="{% static 'js/all.js'%}"></script>
+
+  <!-- end of fontawasome -->
+  <script src="{% static 'js/bootstrap.js ' %}"></script>
+  <script src="{% static  'js/jquery-3.4.1.js' %}"></script>
+  <!-- <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> -->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js.map' %}"></script>
+  <link rel="stylesheet" href="../">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!--Typed.js-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typed.js"></script>
+
+  <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+  <!-- .body {
+      background: #222222;
+      color: white;
+    }
+ -->
+  <style>
+    .extradiv:hover {
+      background: rgb(228, 222, 222);
+      box-shadow: aquamarine;
+      transform: translateY(-10px);
+    }
+
+    .navbar {
+      height: 60px;
+
+    }
+  </style>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><b><em>
+          <i class="fa fa-share-alt text-primary" aria-hidden="true"></i>
+
+          <span
+            style="color:white; font-weight:bold; font-size:1.5rem; margin-bottom:1.5px;">Shareit's</span></em></b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item {% block videoactive %}  {% endblock videoactive %}">
+          <a class="nav-link" href="/Videos">Videos</a>
+        </li>
+        <li class="nav-item {% block channelactive %}  {% endblock channelactive %}">
+          <a class="nav-link" href="/channel">Channel</a>
+        </li>
+        <li class="nav-item {% block demoactive %}  {% endblock demoactive %}">
+          <a class="nav-link" href="/demo">demo</a>
+        </li>
+      </ul>
+      <div class="ml-auto form-inline ">
+        <form method="get" action="/search" class="my-2 my-lg-0 mx-3">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query"
+            id="query">
+          <button class="btn btn-primary my-2 my-sm-0 " type="submit">Search</button>
+        </form>
+
+        <!-- 
+  <a href="" id="navbarDropdown"
+    class="nav-link dropdown-toggle {% if request.path == path_to_my_profile %}active{% endif %} item" role="button" -->
+
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-2">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href='{{path_to_my_profile}}' id="navbarDropdown" role="button"
+              data-toggle="dropdown">
+              <img style="    border: 2px solid #22222222; border-radius: 48%;  width: 8vh;  height: 8vh;"
+                src="{{ShareitsUser.image.url}}" class="ui avatar image">
+              <!-- <img style="    border: 2px solid #22222222; border-radius: 48%;  width: 8vh;  height: 8vh;"
+                src="../media/avatars/abkjs.jpg" class="ui avatar image"> -->
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/logout">Logout</a>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      {% else %}
+      <!-- Button to  trigger Login modal -->
+      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
+        Login
+      </button>
+
+      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#signupModal">
+        SignUp
+      </button>
+      <!-- <a href="/singin">
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal"> singin</button>
+      </a> -->
+
+      </button>
+      {% endif %}
+
+
+    </div>
+  </nav>
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message : </strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+
+  <!-- SignUp Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title" id="signupModalTitle">SignUp Here</h5> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/signup" method='post'>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username"
+                placeholder="Choose a unique username" required>
+            </div>
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="pass1">Choose a password</label>
+              <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password"
+                required>
+            </div>
+            <!-- <div class="form-group">
+              <label for="pass2">Confirm Password</label>
+              <input type="password" class="form-control" id="pass2" name="pass2"
+                placeholder="Enter your password again" required>
+            </div> -->
+
+
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block body %}
+
+
+
+
+  {% endblock body %}
+  <footer>
+    <div class="main-content">
+      <div class="left box">
+        <h2 style="color: #d9d9d9;">
+          About us</h2>
+        <div class="content">
+          <p style="color: #d9d9d9;">
+            CodinNepal is a YouTube channel where you can learn web designing, web development, ui/ux
+            designing, html css tutorial, hover animation and effects, javascript and jquery tutorial and
+            related so on.</p>
+          <div class="social">
+            <a href="https://facebook.com/coding.np"><span class="fab fa-facebook-f"></span></a>
+            <a href="#"><span class="fab fa-twitter"></span></a>
+            <a href="https://instagram.com/coding.np"><span class="fab fa-instagram"></span></a>
+            <a href="https://youtube.com/c/codingnepal"><span class="fab fa-youtube"></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="center box">
+        <h2 style="color: #d9d9d9;">
+          Address</h2>
+        <div class="content">
+          <div class="place">
+            <span class="fas fa-map-marker-alt"></span>
+            <span class="text" style="color: #d9d9d9;">Birendranagar, Surkhet</span>
+          </div>
+          <div class="phone">
+            <span class="fas fa-phone-alt"></span>
+            <span class="text" style="color: #d9d9d9;">+089-765432100</span>
+          </div>
+          <div class="email">
+            <span class="fas fa-envelope"></span>
+            <span class="text" style="color: #d9d9d9;">abc@example.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="right box">
+        <h2 style="color: #d9d9d9;">
+          Contact us</h2>
+        <div class="content" style="color: #d9d9d9;">
+          <form action="#">
+            <div class="email">
+              <div class="text" style="color: #d9d9d9;">
+                Email *</div>
+              <input type="email" required>
+            </div>
+            <div class="msg">
+              <div class="text" style="color: #d9d9d9;">
+                Message *</div>
+              <!-- NOTE: Due to more textarea tag I got an error. So I changed the textarea name to changeit. Please change that changeit name to textarea -->
+              <changeit id=".msgForm" rows="2" cols="25" required></changeit>
+              <!-- replace this changeit name to textarea -->
+
+              <br />
+              <div class="btn">
+                <button type="submit" style="color: #d9d9d9;">Send</button>
+              </div>
+              <div class="bottom">
+                <center>
+                  <span class="credit" style="color: #d9d9d9;">Created By <a href="#top">iCoder</a> | </span>
+                  <span class="far fa-copyright" style="color: #d9d9d9;"></span> 2020 All rights reserved.
+                </center>
+              </div>
+              <script>
+                $(document).ready(function () {
+                  $('.content').click(function () {
+                    $('.content').toggleClass("heart-active")
+                    $('.text').toggleClass("heart-active")
+                    $('.numb').toggleClass("heart-active")
+                    $('.heart').toggleClass("heart-active")
+                  });
+                });
+              </script>
+              <style>
+                .hover-icon-of-like-donwload-herat .heart-btn {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                }
+
+                .hover-icon-of-like-donwload-herat .content {
+                  padding: 13px 16px;
+                  border-radius: 5px;
+                  cursor: pointer;
+                }
+
+                .hover-icon-of-like-donwload-herat.content.heart-active {
+                  border-color: #f9b9c4;
+                  background: #fbd0d8;
+                }
+
+                .hover-icon-of-like-donwload-herat .heart {
+                  position: absolute;
+                  background: url("../static/img/img.png") no-repeat;
+                  background-position: left;
+                  background-size: 2900%;
+                  height: 90px;
+                  width: 90px;
+                  top: 50%;
+                  left: 21%;
+                  transform: translate(-50%, -50%);
+                }
+
+                .hover-icon-of-like-donwload-herat.text {
+                  font-size: 21px;
+                  margin-left: 30px;
+                  color: grey;
+                  font-family: 'Montserrat', sans-serif;
+                }
+
+                .numb:before {
+                  content: '12';
+                  font-size: 21px;
+                  margin-left: 7px;
+                  font-weight: 600;
+                  color: #9C9496;
+                  font-family: sans-serif;
+                }
+
+                .numb.heart-active:before {
+                  content: '13';
+                  color: #000;
+                }
+
+                .text.heart-active {
+                  color: #000;
+                }
+
+                .heart.heart-active {
+                  animation: animate .8s steps(28) 1;
+                  background-position: right;
+                }
+
+                @keyframes animate {
+                  0% {
+                    background-position: left;
+                  }
+
+                  100% {
+                    background-position: right;
+                  }
+                }
+              </style>
+              <style>
+                @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+                * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+                  font-family: 'Poppins', sans-serif;
+                }
+
+                .content1 {
+                  position: relative;
+                  margin: 130px auto;
+                  text-align: center;
+                  padding: 0 20px;
+                }
+
+                .content1 .text {
+                  font-size: 2.5rem;
+                  font-weight: 600;
+                  color: #202020;
+                }
+
+                .content1 .p {
+                  font-size: 2.1875rem;
+                  font-weight: 600;
+                  color: #202020;
+                }
+
+                footer {
+                  /*position: fixed;*/
+                  bottom: 0px;
+                  width: 100%;
+                  background: #111;
+                }
+
+                .main-content {
+                  display: flex;
+                }
+
+                .main-content .box {
+                  flex-basis: 50%;
+                  padding: 10px 20px;
+                }
+
+                .box h2 {
+                  font-size: 1.125rem;
+                  font-weight: 600;
+                  text-transform: uppercase;
+                }
+
+                .box .content {
+                  margin: 20px 0 0 0;
+                  position: relative;
+                }
+
+                .box .content:before {
+                  position: absolute;
+                  content: '';
+                  top: -10px;
+                  height: 2px;
+                  width: 100%;
+                  background: #1a1a1a;
+                }
+
+                .box .content:after {
+                  position: absolute;
+                  content: '';
+                  height: 2px;
+                  width: 15%;
+                  background: #f12020;
+                  top: -10px;
+                }
+
+                .left .content p {
+                  text-align: justify;
+                }
+
+                .left .content .social {
+                  margin: 20px 0 0 0;
+                }
+
+                .left .content .social a {
+                  padding: 0 2px;
+                }
+
+                .left .content .social a span {
+                  height: 40px;
+                  width: 40px;
+                  background: #1a1a1a;
+                  line-height: 40px;
+                  text-align: center;
+                  font-size: 18px;
+                  border-radius: 5px;
+                  transition: 0.3s;
+                }
+
+                .left .content .social a span:hover {
+                  background: #f12020;
+                }
+
+                .center .content .fas {
+                  font-size: 1.4375rem;
+                  background: #1a1a1a;
+                  height: 45px;
+                  width: 45px;
+                  line-height: 45px;
+                  text-align: center;
+                  border-radius: 50%;
+                  transition: 0.3s;
+                  cursor: pointer;
+                }
+
+                .center .content .fas:hover {
+                  background: #f12020;
+                }
+
+                .center .content .text {
+                  font-size: 1.0625rem;
+                  font-weight: 500;
+                  padding-left: 10px;
+                }
+
+                .center .content .phone {
+                  margin: 15px 0;
+                }
+
+                .right form .text {
+                  font-size: 1.0625rem;
+                  margin-bottom: 2px;
+                  color: #656565;
+                }
+
+                .right form .msg {
+                  margin-top: 10px;
+                }
+
+                .right form input,
+                .right form .msgForm {
+                  width: 100%;
+                  font-size: 1.0625rem;
+                  background: #151515;
+                  padding-left: 10px;
+                  border: 1px solid #222222;
+                }
+
+                .right form input:focus,
+                .right form .msgForm:focus {
+                  outline-color: #3498db;
+                }
+
+                .right form input {
+                  height: 35px;
+                }
+
+                .right form .btn {
+                  margin-top: 10px;
+                }
+
+                .right form .btn button {
+                  height: 40px;
+                  width: 100%;
+                  border: none;
+                  outline: none;
+                  background: #f12020;
+                  font-size: 1.0625rem;
+                  font-weight: 500;
+                  cursor: pointer;
+                  transition: .3s;
+                }
+
+                .right form .btn button:hover {
+                  background: #000;
+                }
+
+                .bottom center {
+                  padding: 5px;
+                  font-size: 0.9375rem;
+                  background: #151515;
+                }
+
+                .bottom center span {
+                  color: #656565;
+                }
+
+                .bottom center a {
+                  color: #f12020;
+                  text-decoration: none;
+                }
+
+                .bottom center a:hover {
+                  text-decoration: underline;
+                }
+
+                @media screen and (max-width: 900px) {
+                  footer {
+                    position: relative;
+                    bottom: 0px;
+                  }
+
+                  .main-content {
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                  }
+
+                  .main-content .box {
+                    margin: 5px 0;
+                  }
+                }
+              </style>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    {% block js %}
+    {% endblock js %}
+  </script>
+
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalTitle">Login Here</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/login" method="POST"> {% csrf_token %}
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="loginusername" name="loginusername"
+                placeholder="Enter your username " required>
+            </div>
+            <div class="form-group">
+              <label for="pass">Enter your password </label>
+              <input type="password" class="form-control" id="loginpassword" name="loginpassword"
+                placeholder="Enter your password " required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
